@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompanyInfoViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle, // Get navigation arguments
     private val repository: StockRepository
 ): ViewModel() {
 
@@ -23,10 +23,15 @@ class CompanyInfoViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            // get nav arg
             val symbol = savedStateHandle.get<String>("symbol") ?: return@launch
+            // start loading
             state = state.copy(isLoading = true)
+            // get company info
             val companyInfoResult = async { repository.getCompanyInfo(symbol) }
+            // get intraday info
             val intradayInfoResult = async { repository.getIntradayInfo(symbol) }
+            //
             when(val result = companyInfoResult.await()) {
                 is Resource.Success -> {
                     state = state.copy(

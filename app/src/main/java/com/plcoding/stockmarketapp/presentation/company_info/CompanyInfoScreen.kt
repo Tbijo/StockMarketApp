@@ -21,12 +21,14 @@ import com.plcoding.stockmarketapp.ui.theme.DarkBlue
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Composable
-@Destination
+@Destination // this is a screen to navigate to
 fun CompanyInfoScreen(
-    symbol: String,
+    symbol: String, // the screen doesnt need it but the Navigation library needs for Navigation arguments,
+    // it does it automatically for primitive types so we do have access to it in viewModel
     viewModel: CompanyInfoViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
+
     if(state.error == null) {
         Column(
             modifier = Modifier

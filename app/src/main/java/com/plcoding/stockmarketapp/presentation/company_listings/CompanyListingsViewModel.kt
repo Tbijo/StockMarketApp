@@ -30,13 +30,14 @@ class CompanyListingsViewModel @Inject constructor(
     fun onEvent(event: CompanyListingsEvent) {
         when(event) {
             is CompanyListingsEvent.Refresh -> {
+                // swiping to refresh means refetch data from API
                 getCompanyListings(fetchFromRemote = true)
             }
             is CompanyListingsEvent.OnSearchQueryChange -> {
                 state = state.copy(searchQuery = event.query)
-                searchJob?.cancel()
+                searchJob?.cancel() // aby sa neprehladavalo po kazdom kliku pismena
                 searchJob = viewModelScope.launch {
-                    delay(500L)
+                    delay(500L) // aby az ked urcite dopise slovo sa zacalo vyhladavanie
                     getCompanyListings()
                 }
             }
@@ -53,6 +54,7 @@ class CompanyListingsViewModel @Inject constructor(
                 .collect { result ->
                     when(result) {
                         is Resource.Success -> {
+                            // data not equal to null
                             result.data?.let { listings ->
                                 state = state.copy(
                                     companies = listings

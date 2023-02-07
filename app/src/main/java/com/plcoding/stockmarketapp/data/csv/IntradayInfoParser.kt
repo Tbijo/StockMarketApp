@@ -30,6 +30,7 @@ class IntradayInfoParser @Inject constructor(): CSVParser<IntradayInfo> {
                     dto.toIntradayInfo()
                 }
                 .filter {
+                    // leave only data from 4 days back
                     it.date.dayOfMonth == LocalDate.now().minusDays(4).dayOfMonth
                 }
                 .sortedBy {

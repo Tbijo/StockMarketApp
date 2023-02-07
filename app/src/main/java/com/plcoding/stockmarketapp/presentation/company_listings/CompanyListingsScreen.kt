@@ -21,19 +21,21 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-@Destination(start = true)
+@Destination(start = true) // Every screen should be annotated
 fun CompanyListingsScreen(
-    navigator: DestinationsNavigator,
+    navigator: DestinationsNavigator, // Library for Navigation
     viewModel: CompanyListingsViewModel = hiltViewModel()
 ) {
+
     val swipeRefreshState = rememberSwipeRefreshState(
         isRefreshing = viewModel.state.isRefreshing
     )
     val state = viewModel.state
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        OutlinedTextField(
+        OutlinedTextField( // Search Bar
             value = state.searchQuery,
             onValueChange = {
                 viewModel.onEvent(
@@ -50,6 +52,7 @@ fun CompanyListingsScreen(
             singleLine = true
         )
         SwipeRefresh(
+            // potiahnutim dole (drag down) sa spusti event
             state = swipeRefreshState,
             onRefresh = {
                 viewModel.onEvent(CompanyListingsEvent.Refresh)
@@ -66,11 +69,13 @@ fun CompanyListingsScreen(
                             .fillMaxWidth()
                             .clickable {
                                 navigator.navigate(
-                                    CompanyInfoScreenDestination(company.symbol)
+                                    CompanyInfoScreenDestination(company.symbol) // generated code
+                                // no need to work with routes and strings
                                 )
                             }
                             .padding(16.dp)
                     )
+                    // We want a divider but not after last item
                     if(i < state.companies.size) {
                         Divider(modifier = Modifier.padding(
                             horizontal = 16.dp

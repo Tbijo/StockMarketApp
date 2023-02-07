@@ -5,6 +5,8 @@ import com.plcoding.stockmarketapp.data.remote.dto.CompanyInfoDto
 import com.plcoding.stockmarketapp.domain.model.CompanyInfo
 import com.plcoding.stockmarketapp.domain.model.CompanyListing
 
+// Map methods are no longer in data classes
+
 fun CompanyListingEntity.toCompanyListing(): CompanyListing {
     return CompanyListing(
         name = name,

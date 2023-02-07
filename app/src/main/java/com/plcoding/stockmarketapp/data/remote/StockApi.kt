@@ -11,7 +11,7 @@ interface StockApi {
     @GET("query?function=LISTING_STATUS")
     suspend fun getListings(
         @Query("apikey") apiKey: String = API_KEY
-    ): ResponseBody
+    ): ResponseBody // get access to a byte stream (to read it)
 
     @GET("query?function=TIME_SERIES_INTRADAY&interval=60min&datatype=csv")
     suspend fun getIntradayInfo(

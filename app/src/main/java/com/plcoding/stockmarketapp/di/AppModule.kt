@@ -16,7 +16,7 @@ import retrofit2.create
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(SingletonComponent::class) // live as long as the application
 object AppModule {
 
     @Provides

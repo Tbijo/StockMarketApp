@@ -75,7 +75,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
-    // OpenCSV
+    // OpenCSV - parse csv
     implementation 'com.opencsv:opencsv:5.5.2'
 
     // Compose dependencies
@@ -84,7 +84,7 @@ dependencies {
     implementation "androidx.activity:activity-compose:1.6.0-alpha01"
     implementation "com.google.accompanist:accompanist-swiperefresh:0.24.2-alpha"
 
-    // Compose Nav Destinations
+    // Compose Nav Destinations - navigation
     implementation 'io.github.raamcosta.compose-destinations:core:1.1.2-beta'
     ksp 'io.github.raamcosta.compose-destinations:ksp:1.1.2-beta'
 

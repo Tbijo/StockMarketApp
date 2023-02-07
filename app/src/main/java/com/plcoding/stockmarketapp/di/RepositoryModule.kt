@@ -17,7 +17,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-    @Binds
+    // this function is necessary because we are passing Interface Parser in repository and we want a concrete implementation
+    @Binds // only for abstract functions, providing abstraction for something
     @Singleton
     abstract fun bindCompanyListingsParser(
         companyListingsParser: CompanyListingsParser
@@ -29,6 +30,7 @@ abstract class RepositoryModule {
         intradayInfoParser: IntradayInfoParser
     ): CSVParser<IntradayInfo>
 
+    // this function is necessary because we are passing Interface Repo in viewModel and we want a concrete implementation
     @Binds
     @Singleton
     abstract fun bindStockRepository(
